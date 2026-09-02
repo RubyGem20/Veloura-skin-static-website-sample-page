@@ -1,0 +1,1 @@
+# Veloura-skin-static-website-sample-page
