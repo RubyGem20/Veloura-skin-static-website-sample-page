@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Payment | VELOURA SKIN</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+<header class="shop-header">
+
+    <div class="shop-logo">
+
+        <a href="index.html">
+
+            <img
+                src="images/logo.png"
+                width="65"
+                alt="Veloura Skin Logo"
+            >
+
+        </a>
+
+        <div>
+
+            <h1>VELOURA SKIN</h1>
+
+            <p>
+                Simple Rituals. Radiant Skin.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <nav class="shop-nav">
+
+        <a href="index.html">
+            HOME
+        </a>
+
+        <a href="collection.html">
+            SHOP
+        </a>
+
+        <a href="collection.html#shopping-cart">
+            CART
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- =====================================================
+     PAYMENT HERO
+====================================================== -->
+
+<section class="payment-page">
+
+    <div class="payment-container">
+
+        <div class="payment-heading">
+
+            <p class="eyebrow">
+                VELOURA SKIN
+            </p>
+
+            <h2>
+                Complete Your Order
+            </h2>
+
+            <p>
+                Review your selection before proceeding
+                with your payment.
+            </p>
+
+        </div>
+
+
+        <!-- ORDER -->
+
+        <div class="payment-card">
+
+            <h3>
+                Your Order
+            </h3>
+
+            <div id="payment-items"></div>
+
+
+            <div class="payment-total">
+
+                <span>
+                    Total
+                </span>
+
+                <strong>
+                    ₦<span id="payment-total">
+                        0
+                    </span>
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- PAYMENT -->
+
+        <div class="payment-card">
+
+            <h3>
+                Payment Details
+            </h3>
+
+            <p class="demo-note">
+
+                🔒 This is a demonstration payment page.
+                No real payment will be processed.
+
+            </p>
+
+
+            <label>
+                Cardholder Name
+            </label>
+
+            <input
+                type="text"
+                placeholder="Full Name"
+            >
+
+
+            <label>
+                Card Number
+            </label>
+
+            <input
+                type="text"
+                placeholder="0000 0000 0000 0000"
+            >
+
+
+            <div class="payment-row">
+
+                <div>
+
+                    <label>
+                        Expiry Date
+                    </label>
+
+                    <input
+                        type="text"
+                        placeholder="MM/YY"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        CVV
+                    </label>
+
+                    <input
+                        type="text"
+                        placeholder="123"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button
+                id="demo-payment"
+                class="payment-button"
+            >
+
+                PAY NOW
+
+            </button>
+
+
+            <a
+                href="collection.html"
+                class="back-shopping"
+            >
+
+                ← Back to Shopping
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div class="footer-bottom">
+
+        © 2026 VELOURA SKIN.
+        All Rights Reserved.
+
+    </div>
+
+</footer>
+
+
+<script>
+
+const cart =
+    JSON.parse(
+        localStorage.getItem("velouraCart")
+    ) || [];
+
+
+const paymentItems =
+    document.getElementById("payment-items");
+
+const paymentTotal =
+    document.getElementById("payment-total");
+
+
+let total = 0;
+
+
+if (cart.length === 0) {
+
+    paymentItems.innerHTML = `
+        <p>
+            Your cart is empty.
+            <a href="collection.html">
+                Continue shopping
+            </a>
+        </p>
+    `;
+
+} else {
+
+    cart.forEach(function(product) {
+
+        total += product.price;
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "payment-product";
+
+        item.innerHTML = `
+
+            <img
+                src="${product.image}"
+                alt="${product.name}"
+            >
+
+            <div>
+
+                <h4>
+                    ${product.name}
+                </h4>
+
+                <p>
+                    ₦${product.price.toLocaleString()}
+                </p>
+
+            </div>
+
+        `;
+
+        paymentItems.appendChild(item);
+
+    });
+
+}
+
+
+paymentTotal.textContent =
+    total.toLocaleString();
+
+
+document
+    .getElementById("demo-payment")
+    .addEventListener("click", function() {
+
+        if (cart.length === 0) {
+
+            alert(
+                "Your cart is empty."
+            );
+
+            return;
+        }
+
+
+        alert(
+            "This is a demo payment page. No real payment has been processed."
+        );
+
+    });
+
+</script>
+
+</body>
+
+</html>
